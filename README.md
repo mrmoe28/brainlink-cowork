@@ -1,44 +1,66 @@
-# brainlink-cowork
+# Brain Link MCP Server
 
-MCP server bridging Brain Link and Claude Desktop via local Ollama (`Nilabh_yadav/Jarvis:latest`).
+MCP server bridging Brain Link, Claude Desktop, and Moe's desktop automation ecosystem.
 
-## Tools
+## Features
+- **File System Operations**: Read, write, move, delete, watch directories
+- **API Bridges**: Markate CRM, Square, Solar Ops, GitHub integrations
+- **Task Routing**: Route simple tasks to Haiku, complex reasoning to Opus
+- **Comms Sequences**: Schedule and manage automated follow-up emails
+- **Desktop Automation**: Browser control, image processing, file operations
+- **Real-time Sync**: Watch directories for incoming files (permits, invoices, images)
 
-| Tool | Description |
-|------|-------------|
-| `jarvis_chat` | Chat with local Jarvis model (stateful session) |
-| `jarvis_analyze` | Analyze code/text with Jarvis (stateless) |
-| `jarvis_summarize` | Summarize content with Jarvis |
-| `jarvis_models` | List available Ollama models |
-| `jarvis_pull` | Pull a model to local Ollama |
-| `brain_recall` | Search Brain Link memory |
-| `brain_remember` | Store a new memory |
-
-## Setup
-
+## Installation
 ```bash
 npm install
-npm run build
+npm start
 ```
 
-## Claude Desktop Config
+## Environment Variables
+```
+GITHUB_TOKEN=your_token
+MARKATE_API_KEY=your_key
+SQUARE_API_KEY=your_key
+SOLAR_OPS_API_KEY=your_key
+PORT=3000
+```
 
-Add to `claude_desktop_config.json`:
+## API Endpoints
 
+### POST /mcp
+MCP protocol handler for all tools and operations.
+
+Request:
 ```json
 {
-  "mcpServers": {
-    "brainlink-cowork": {
-      "command": "node",
-      "args": ["C:/Users/Dell/Downloads/brainlink-cowork/dist/index.js"]
-    }
+  "tool": "file_read",
+  "params": {
+    "filePath": "/path/to/file"
   }
 }
 ```
 
-## Environment Variables (optional)
+### GET /health
+Health check endpoint.
 
-- `OLLAMA_URL` — Ollama endpoint (default: `http://localhost:11434`)
-- `OLLAMA_MODEL` — Default model (default: `Nilabh_yadav/Jarvis:latest`)
-- `SUPABASE_URL` — Open Brain Supabase URL (for memory tools)
-- `SUPABASE_KEY` — Open Brain Supabase key (for memory tools)
+## Tools Available
+- `file_read` - Read file contents
+- `file_write` - Write content to files
+- `api_call` - Make authenticated API calls
+- `task_route` - Route tasks to appropriate Claude model
+
+## Deployment
+Deployed to Coolify at DigitalOcean (45.55.77.74)
+
+## Architecture
+- Node.js + MCP SDK
+- Express for HTTP endpoints
+- Axios for API calls
+- File watchers for automation triggers
+
+## Build Information
+- Type: Node.js MCP Server
+- Dependencies: @modelcontextprotocol/sdk, express, axios, dotenv
+- Generator: Brain Link v2.2
+- Date: March 2026
+- License: MIT

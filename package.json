@@ -1,24 +1,20 @@
 {
-  "name": "brainlink-cowork",
+  "name": "brainlink-mcp-server",
   "version": "1.0.0",
-  "description": "MCP server bridging Brain Link and Claude Desktop via Ollama Jarvis model",
-  "main": "dist/index.js",
+  "description": "MCP server bridging Brain Link, Claude Desktop, and desktop automation",
   "type": "module",
-  "bin": {
-    "brainlink-cowork": "dist/index.js"
-  },
+  "main": "server.js",
   "scripts": {
-    "build": "tsc",
-    "start": "node dist/index.js",
-    "dev": "tsc && node dist/index.js"
+    "start": "node server.js",
+    "dev": "nodemon server.js"
   },
   "dependencies": {
-    "@modelcontextprotocol/sdk": "^1.12.1"
+    "@modelcontextprotocol/sdk": "^1.0.0",
+    "express": "^4.18.2",
+    "axios": "^1.6.0",
+    "dotenv": "^16.0.0"
   },
   "devDependencies": {
-    "@types/node": "^22.0.0",
-    "typescript": "^5.7.0"
-  },
-  "keywords": ["mcp", "brainlink", "claude-desktop", "ollama", "jarvis"],
-  "license": "MIT"
+    "nodemon": "^3.0.0"
+  }
 }
